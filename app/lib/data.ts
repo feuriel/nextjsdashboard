@@ -1,4 +1,26 @@
 import { sql } from '@vercel/postgres';
+//import { createClient } from '@supabase/supabase-js'
+
+import { db } from "@vercel/postgres";
+
+const client = await db.connect();
+
+async function _fetchRevenue() {
+	const data = await client.sql`
+    SELECT * FROM revenue;
+  `;
+
+	return data.rows;
+}
+
+export async function fetchRevenue() {
+  try {
+  	return Response.json(await _fetchRevenue());
+  } catch (error) {
+  	return Response.json({ error }, { status: 500 });
+  }
+}
+
 import {
   CustomerField,
   CustomersTableType,
@@ -9,8 +31,9 @@ import {
 } from './definitions';
 import { formatCurrency } from './utils';
 
-export async function fetchRevenue() {
+export async function GudfetchRevenue() {
   try {
+  //  const session = await supabase.auth.getSession();
     // Artificially delay a response for demo purposes.
     // Don't do this in production :)
 
@@ -23,7 +46,7 @@ export async function fetchRevenue() {
 
     return data.rows;
   } catch (error) {
-    console.error('Database Error:', error);
+    console.error('Database Error in fetchRevenue:', error);
     throw new Error('Failed to fetch revenue data.');
   }
 }
