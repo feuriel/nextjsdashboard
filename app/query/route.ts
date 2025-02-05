@@ -3,8 +3,7 @@ import { db } from "@vercel/postgres";
 const client = await db.connect();
 
 async function listInvoices() {
-  const data = await client.sql
-    `SELECT * FROM revenue;`;
+  const data = await client.sql`SELECT * FROM revenue;`;
   // `
   //   SELECT invoices.amount, customers.name
   //   FROM invoices
@@ -12,13 +11,13 @@ async function listInvoices() {
   //   WHERE invoices.amount = 666;
   // `;
 
-	return data.rows;
+  return data.rows;
 }
 
 export async function GET() {
   try {
-  	return Response.json(await listInvoices());
+    return Response.json(await listInvoices());
   } catch (error) {
-  	return Response.json({ error }, { status: 500 });
+    return Response.json({ error }, { status: 500 });
   }
 }
