@@ -1,4 +1,3 @@
 export default function Page() {
-  console.log('im a front end component')
-    return <p>Customers Page</p>;
-  }
+  return <p>Customers Page</p>;
+}
