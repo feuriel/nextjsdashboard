@@ -2,7 +2,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export default async function Page() {
-  const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
+  const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY as string);
   const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
   //const model = genAI.getGenerativeModel({ model: "imagen-3.0-generate-002" });
 
