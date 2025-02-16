@@ -42,13 +42,13 @@ export default async function Page() {
     //   numberOfCustomers,
     // } = cardData);
   } catch (err) {
-    return <div>error fetching</div>;
+    return <div>error on fetching </div>;
   }
 
   //console.log(revenue);
   return (
     <main>
-      <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
+      <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl `}>
         Dashboard
       </h1>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
