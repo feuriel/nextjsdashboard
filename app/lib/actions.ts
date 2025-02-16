@@ -26,14 +26,17 @@ export async function createInvoice(formData: FormData) {
     amount: formData.get("amount"),
     status: formData.get("status"),
   };
-  const amountInCents = rawFormData.amount * 100;
+  let amm = rawFormData.amount;
+  const amountInCents = (amm as unknown as number) * 100;
   const date = new Date().toISOString().split("T")[0];
   console.log(amountInCents);
 
   try {
     await client.sql`
       INSERT INTO invoices (customer_id, amount, status, date)
-      VALUES (${customerId}, ${amountInCents}, ${status}, ${date})
+      VALUES (${rawFormData.customerId as any}, ${amountInCents}, ${
+      rawFormData.status as any
+    }, ${date})
     `;
   } catch (error) {
     // We'll log the error to the console for now
